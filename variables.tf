@@ -8,7 +8,7 @@ variable "engine_version" {
   default = "9.4.4"
 }
 variable "instance_type" {
-  default = "t2.micro"
+  default = "db.t2.micro"
 }
 variable "storage_type" {
   default = "gp2"
