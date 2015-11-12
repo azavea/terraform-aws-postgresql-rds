@@ -90,7 +90,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   statistic = "Average"
   threshold = "75"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 }
 
@@ -105,7 +105,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
   statistic = "Average"
   threshold = "10"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 }
 
@@ -121,7 +121,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
   # 5GB in bytes
   threshold = "5000000000"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 }
 
@@ -137,6 +137,6 @@ resource "aws_cloudwatch_metric_alarm" "memory_free" {
   # 12MB in bytes
   threshold = "128000000"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 }
