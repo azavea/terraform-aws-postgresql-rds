@@ -92,6 +92,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_queue" {
@@ -107,6 +108,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_free" {
@@ -123,6 +125,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "memory_free" {
@@ -134,9 +137,10 @@ resource "aws_cloudwatch_metric_alarm" "memory_free" {
   namespace = "AWS/RDS"
   period = "60"
   statistic = "Average"
-  # 12MB in bytes
+  # 128MB in bytes
   threshold = "128000000"
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
