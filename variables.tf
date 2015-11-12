@@ -8,7 +8,7 @@ variable "engine_version" {
   default = "9.4.4"
 }
 variable "instance_type" {
-  default = "t2.micro"
+  default = "db.t2.micro"
 }
 variable "storage_type" {
   default = "gp2"
@@ -39,3 +39,5 @@ variable "private_subnet_ids" { }
 variable "parameter_group_family" {
   default = "postgres9.4"
 }
+
+variable "alarm_actions" { }

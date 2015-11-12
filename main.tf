@@ -90,8 +90,9 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   statistic = "Average"
   threshold = "75"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_queue" {
@@ -105,8 +106,9 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
   statistic = "Average"
   threshold = "10"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_free" {
@@ -121,8 +123,9 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
   # 5GB in bytes
   threshold = "5000000000"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "memory_free" {
@@ -134,9 +137,10 @@ resource "aws_cloudwatch_metric_alarm" "memory_free" {
   namespace = "AWS/RDS"
   period = "60"
   statistic = "Average"
-  # 12MB in bytes
+  # 128MB in bytes
   threshold = "128000000"
   dimensions {
-    DBInstanceIdentifier = "${aws_db_instance.postgresql.name}"
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
+  alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
