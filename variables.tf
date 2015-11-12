@@ -39,3 +39,5 @@ variable "private_subnet_ids" { }
 variable "parameter_group_family" {
   default = "postgres9.4"
 }
+
+variable "alarm_actions" { }

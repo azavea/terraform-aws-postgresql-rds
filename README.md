@@ -26,6 +26,8 @@ module "postgresql_rds" {
 
   private_subnet_ids = "subnet-4a887f3c,subnet-76dae35d"
   parameter_group_family = "postgres9.4"
+
+  alarm_actions = "arn:aws:sns..."
 }
 ```
 
@@ -52,6 +54,7 @@ module "postgresql_rds" {
 - `private_subnet_ids` - Comma delimited list of private subnet IDs
 - `parameter_group_family` - Database engine parameter group family (default:
   `postgres9.4`)
+- `alarm_actions` - Comma delimited list of ARNs to be notified via CloudWatch
 
 ## Outputs
 
