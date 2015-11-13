@@ -3,7 +3,6 @@
 #
 
 resource "aws_security_group" "postgresql" {
-  name = "database-security-group"
   vpc_id = "${var.vpc_id}"
 
   ingress {
@@ -33,7 +32,7 @@ resource "aws_db_instance" "postgresql" {
   allocated_storage = "${var.allocated_storage}"
   engine = "postgres"
   engine_version = "${var.engine_version}"
-  identifier = "database"
+  identifier = "${var.database_name}"
   instance_class = "${var.instance_type}"
   storage_type = "${var.storage_type}"
   name = "${var.database_name}"
@@ -55,7 +54,7 @@ resource "aws_db_instance" "postgresql" {
 }
 
 resource "aws_db_subnet_group" "default" {
-  name = "database-subnet-group"
+  name = "${var.database_name}-subnet-group"
   description = "Private subnets for the RDS instances"
   subnet_ids = ["${split(",", var.private_subnet_ids)}"]
 
@@ -65,7 +64,7 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_db_parameter_group" "default" {
-  name = "database-parameter-group"
+  name = "${var.database_name}-parameter-group"
   description = "Parameter group for the RDS instances"
   family = "${var.parameter_group_family}"
 
