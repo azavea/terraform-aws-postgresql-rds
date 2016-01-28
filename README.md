@@ -60,4 +60,5 @@ module "postgresql_rds" {
 
 - `hostname` - Public DNS name of database instance
 - `port` - Port of database instance
-- `endpoint` - Public DNS name and post separated by a `:`
+- `endpoint` - Public DNS name and port separated by a `:`
+- `id` - The database instance ID
