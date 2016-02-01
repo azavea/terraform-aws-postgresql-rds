@@ -1,3 +1,8 @@
+## 0.4.0
+
+- Add database identifier to alarm names to ensure multiple instances do not
+  conflict within a single AWS account.
+
 ## 0.3.0
 
 - Add RDS instance id in output `id`.
