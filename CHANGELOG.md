@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Add RDS instance id in output `id`.
+
 ## 0.2.1
 
 - Remove hardcoded identifiers and interpolate `database_name` to create unique
