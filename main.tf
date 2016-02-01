@@ -79,7 +79,7 @@ resource "aws_db_parameter_group" "default" {
 #
 
 resource "aws_cloudwatch_metric_alarm" "cpu" {
-  alarm_name          = "alarmDatabaseServerCPUUtilization"
+  alarm_name          = "alarmDatabaseServerCPUUtilization-${var.database_name}"
   alarm_description   = "Database server CPU utilization"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -97,7 +97,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_queue" {
-  alarm_name          = "alarmDatabaseServerDiskQueueDepth"
+  alarm_name          = "alarmDatabaseServerDiskQueueDepth-${var.database_name}"
   alarm_description   = "Database server disk queue depth"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -115,7 +115,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_free" {
-  alarm_name          = "alarmDatabaseServerFreeStorageSpace"
+  alarm_name          = "alarmDatabaseServerFreeStorageSpace-${var.database_name}"
   alarm_description   = "Database server free storage space"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -135,7 +135,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "memory_free" {
-  alarm_name          = "alarmDatabaseServerFreeableMemory"
+  alarm_name          = "alarmDatabaseServerFreeableMemory-${var.database_name}"
   alarm_description   = "Database server freeable memory"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
