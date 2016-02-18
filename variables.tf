@@ -1,15 +1,13 @@
-variable "vpc_id" {
-}
+variable "vpc_id" {}
 
-variable "vpc_cidr_block" {
-}
+variable "vpc_cidr_block" {}
 
 variable "allocated_storage" {
   default = "32"
 }
 
 variable "engine_version" {
-  default = "9.4.4"
+  default = "9.5.2"
 }
 
 variable "instance_type" {
@@ -20,14 +18,11 @@ variable "storage_type" {
   default = "gp2"
 }
 
-variable "database_name" {
-}
+variable "database_name" {}
 
-variable "database_password" {
-}
+variable "database_password" {}
 
-variable "database_username" {
-}
+variable "database_username" {}
 
 variable "backup_retention_period" {
   default = "30"
@@ -55,12 +50,10 @@ variable "storage_encrypted" {
   default = false
 }
 
-variable "private_subnet_ids" {
-}
+variable "private_subnet_ids" {}
 
 variable "parameter_group_family" {
-  default = "postgres9.4"
+  default = "postgres9.5"
 }
 
-variable "alarm_actions" {
-}
+variable "alarm_actions" {}

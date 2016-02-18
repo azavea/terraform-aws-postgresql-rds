@@ -61,7 +61,8 @@ module "postgresql_rds" {
 
 ## Outputs
 
+- `id` - The database instance ID
+- `database_security_group_id` - Security group ID of the database
 - `hostname` - Public DNS name of database instance
 - `port` - Port of database instance
 - `endpoint` - Public DNS name and port separated by a `:`
-- `id` - The database instance ID
