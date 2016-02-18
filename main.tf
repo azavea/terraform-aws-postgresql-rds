@@ -5,23 +5,29 @@
 resource "aws_security_group" "postgresql" {
   vpc_id = "${var.vpc_id}"
 
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
-  }
-
-  egress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
-  }
-
   tags {
     Name = "sgDatabaseServer"
   }
+}
+
+resource "aws_security_group_rule" "postgresql_ingress" {
+    type = "ingress"
+    from_port = 5432
+    to_port = 5432
+    protocol = "tcp"
+    cidr_blocks = ["${var.vpc_cidr_block}"]
+
+    security_group_id = "${aws_security_group.postgresql.id}"
+}
+
+resource "aws_security_group_rule" "postgresql_egress" {
+    type = "egress"
+    from_port = 5432
+    to_port = 5432
+    protocol = "tcp"
+    cidr_blocks = ["${var.vpc_cidr_block}"]
+
+    security_group_id = "${aws_security_group.postgresql.id}"
 }
 
 #
