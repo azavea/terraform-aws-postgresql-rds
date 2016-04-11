@@ -41,6 +41,7 @@ resource "aws_db_instance" "postgresql" {
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
   maintenance_window      = "${var.maintenance_window}"
+  auto_minor_version_upgrade = "${var.auto_minor_version_upgrade}"
   multi_az                = "${var.multi_availability_zone}"
   port                    = "5432"
   vpc_security_group_ids  = ["${aws_security_group.postgresql.id}"]
