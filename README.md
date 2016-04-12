@@ -21,6 +21,7 @@ module "postgresql_rds" {
   backup_retention_period = "30"
   backup_window = "04:00-04:30"
   maintenance_window = "sun:04:30-sun:05:30"
+  auto_minor_version_upgrade = false
   multi_availability_zone = true
   storage_encrypted = false
 
@@ -48,6 +49,8 @@ module "postgresql_rds" {
   `04:00-04:30`)
 - `maintenance_window` - 60 minute time window to reserve for maintenance
   (default: `sun:04:30-sun:05:30`)
+- `auto_minor_version_upgrade` - Minor engine upgrades are applied automatically
+ to the DB instance during the maintenance window (default: `true`)
 - `multi_availability_zone` - Flag to enable hot standby in another availability
   zone (default: `false`)
 - `storage_encrypted` - Flag to enable storage encryption (default: `false`)

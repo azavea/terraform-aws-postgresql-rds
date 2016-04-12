@@ -43,6 +43,10 @@ variable "maintenance_window" {
   default = "sun:04:30-sun:05:30"
 }
 
+variable "auto_minor_version_upgrade" {
+  default = true
+}
+
 variable "multi_availability_zone" {
   default = false
 }
