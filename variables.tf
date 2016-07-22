@@ -1,3 +1,11 @@
+variable "project" {
+  default = "Unknown"
+}
+
+variable "environment" {
+  default = "Unknown"
+}
+
 variable "vpc_id" {}
 
 variable "vpc_cidr_block" {}

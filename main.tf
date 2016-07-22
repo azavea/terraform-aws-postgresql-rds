@@ -6,7 +6,9 @@ resource "aws_security_group" "postgresql" {
   vpc_id = "${var.vpc_id}"
 
   tags {
-    Name = "sgDatabaseServer"
+    Name        = "sgDatabaseServer"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -136,6 +138,9 @@ resource "aws_cloudwatch_metric_alarm" "memory_free" {
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
+    Name        = "DatabaseServer"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 
   alarm_actions = ["${split(",", var.alarm_actions)}"]

@@ -29,11 +29,15 @@ module "postgresql_rds" {
   parameter_group_family = "postgres9.4"
 
   alarm_actions = "arn:aws:sns..."
+  project = "Something"
+  environment = "Staging"
 }
 ```
 
 ## Variables
 
+- `project` - Name of project this VPC is meant to house (default: `Unknown`)
+- `environment` - Name of environment this VPC is targeting (default: `Unknown`)
 - `vpc_id` - ID of VPC meant to house database
 - `vpc_cidr_block` - CIDR block of VPC
 - `allocated_storage` - Storage allocated to database instance (default: `32`)
