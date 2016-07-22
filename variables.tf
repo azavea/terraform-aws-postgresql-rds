@@ -8,8 +8,6 @@ variable "environment" {
 
 variable "vpc_id" {}
 
-variable "vpc_cidr_block" {}
-
 variable "allocated_storage" {
   default = "32"
 }
@@ -25,6 +23,8 @@ variable "instance_type" {
 variable "storage_type" {
   default = "gp2"
 }
+
+variable "database_identifier" {}
 
 variable "database_name" {}
 
@@ -58,10 +58,28 @@ variable "storage_encrypted" {
   default = false
 }
 
-variable "private_subnet_ids" {}
+variable "subnet_group" {}
 
-variable "parameter_group_family" {
-  default = "postgres9.5"
+variable "parameter_group" {
+  default = "default.postgres9.4"
+}
+
+variable "alarm_cpu_threshold" {
+  default = 75
+}
+
+variable "alarm_disk_queue_threshold" {
+  default = 10
+}
+
+variable "alarm_free_disk_threshold" {
+  # 5GB
+  default = 5000000000
+}
+
+variable "alarm_free_memory_threshold" {
+  # 128MB
+  default = 128000000
 }
 
 variable "alarm_actions" {}
