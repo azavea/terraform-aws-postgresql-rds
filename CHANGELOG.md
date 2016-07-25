@@ -1,3 +1,10 @@
+## 1.0.0
+
+- Add support for `auto_minor_version_upgrade`.
+- Remove security, subnet, and parameter groups.
+- Add `database_security_group_id` as output.
+- Add support for custom CloudWatch alarm thresholds.
+
 ## 0.4.0
 
 - Add database identifier to alarm names to ensure multiple instances do not
