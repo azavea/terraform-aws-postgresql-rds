@@ -5,22 +5,10 @@
 resource "aws_security_group" "postgresql" {
   vpc_id = "${var.vpc_id}"
 
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
-  }
-
-  egress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
-  }
-
   tags {
-    Name = "sgDatabaseServer"
+    Name        = "sgDatabaseServer"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -32,7 +20,7 @@ resource "aws_db_instance" "postgresql" {
   allocated_storage       = "${var.allocated_storage}"
   engine                  = "postgres"
   engine_version          = "${var.engine_version}"
-  identifier              = "${var.database_name}"
+  identifier              = "${var.database_identifier}"
   instance_class          = "${var.instance_type}"
   storage_type            = "${var.storage_type}"
   name                    = "${var.database_name}"
@@ -44,33 +32,14 @@ resource "aws_db_instance" "postgresql" {
   multi_az                = "${var.multi_availability_zone}"
   port                    = "5432"
   vpc_security_group_ids  = ["${aws_security_group.postgresql.id}"]
-  db_subnet_group_name    = "${aws_db_subnet_group.default.name}"
-  parameter_group_name    = "${aws_db_parameter_group.default.name}"
+  db_subnet_group_name    = "${var.subnet_group}"
+  parameter_group_name    = "${var.parameter_group}"
   storage_encrypted       = "${var.storage_encrypted}"
 
   tags {
-    Name = "DatabaseServer"
-  }
-}
-
-resource "aws_db_subnet_group" "default" {
-  name        = "${var.database_name}-subnet-group"
-  description = "Private subnets for the RDS instances"
-  subnet_ids  = ["${split(",", var.private_subnet_ids)}"]
-
-  tags {
-    Name = "dbsngDatabaseServer"
-  }
-}
-
-resource "aws_db_parameter_group" "default" {
-  name        = "${var.database_name}-parameter-group"
-  description = "Parameter group for the RDS instances"
-  family      = "${var.parameter_group_family}"
-
-  parameter {
-    name  = "log_min_duration_statement"
-    value = "500"
+    Name        = "DatabaseServer"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -78,8 +47,8 @@ resource "aws_db_parameter_group" "default" {
 # CloudWatch resources
 #
 
-resource "aws_cloudwatch_metric_alarm" "cpu" {
-  alarm_name          = "alarmDatabaseServerCPUUtilization-${var.database_name}"
+resource "aws_cloudwatch_metric_alarm" "database_cpu" {
+  alarm_name          = "alarm${var.environment}DatabaseServerCPUUtilization"
   alarm_description   = "Database server CPU utilization"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -87,7 +56,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   namespace           = "AWS/RDS"
   period              = "300"
   statistic           = "Average"
-  threshold           = "75"
+  threshold           = "${var.alarm_cpu_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
@@ -96,8 +65,8 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
-resource "aws_cloudwatch_metric_alarm" "disk_queue" {
-  alarm_name          = "alarmDatabaseServerDiskQueueDepth-${var.database_name}"
+resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
+  alarm_name          = "alarm${var.environment}DatabaseServerDiskQueueDepth"
   alarm_description   = "Database server disk queue depth"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -105,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
   namespace           = "AWS/RDS"
   period              = "60"
   statistic           = "Average"
-  threshold           = "10"
+  threshold           = "${var.alarm_disk_queue_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
@@ -114,8 +83,8 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue" {
   alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
-resource "aws_cloudwatch_metric_alarm" "disk_free" {
-  alarm_name          = "alarmDatabaseServerFreeStorageSpace-${var.database_name}"
+resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeStorageSpace"
   alarm_description   = "Database server free storage space"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -123,9 +92,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
   namespace           = "AWS/RDS"
   period              = "60"
   statistic           = "Average"
-
-  # 5GB in bytes
-  threshold = "5000000000"
+  threshold           = "${var.alarm_free_disk_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
@@ -134,8 +101,8 @@ resource "aws_cloudwatch_metric_alarm" "disk_free" {
   alarm_actions = ["${split(",", var.alarm_actions)}"]
 }
 
-resource "aws_cloudwatch_metric_alarm" "memory_free" {
-  alarm_name          = "alarmDatabaseServerFreeableMemory-${var.database_name}"
+resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeableMemory"
   alarm_description   = "Database server freeable memory"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -143,9 +110,7 @@ resource "aws_cloudwatch_metric_alarm" "memory_free" {
   namespace           = "AWS/RDS"
   period              = "60"
   statistic           = "Average"
-
-  # 128MB in bytes
-  threshold = "128000000"
+  threshold           = "${var.alarm_free_memory_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"

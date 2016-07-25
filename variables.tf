@@ -1,15 +1,19 @@
-variable "vpc_id" {
+variable "project" {
+  default = "Unknown"
 }
 
-variable "vpc_cidr_block" {
+variable "environment" {
+  default = "Unknown"
 }
+
+variable "vpc_id" {}
 
 variable "allocated_storage" {
   default = "32"
 }
 
 variable "engine_version" {
-  default = "9.4.4"
+  default = "9.5.2"
 }
 
 variable "instance_type" {
@@ -20,14 +24,13 @@ variable "storage_type" {
   default = "gp2"
 }
 
-variable "database_name" {
-}
+variable "database_identifier" {}
 
-variable "database_password" {
-}
+variable "database_name" {}
 
-variable "database_username" {
-}
+variable "database_password" {}
+
+variable "database_username" {}
 
 variable "backup_retention_period" {
   default = "30"
@@ -43,6 +46,10 @@ variable "maintenance_window" {
   default = "sun:04:30-sun:05:30"
 }
 
+variable "auto_minor_version_upgrade" {
+  default = true
+}
+
 variable "multi_availability_zone" {
   default = false
 }
@@ -51,12 +58,28 @@ variable "storage_encrypted" {
   default = false
 }
 
-variable "private_subnet_ids" {
+variable "subnet_group" {}
+
+variable "parameter_group" {
+  default = "default.postgres9.4"
 }
 
-variable "parameter_group_family" {
-  default = "postgres9.4"
+variable "alarm_cpu_threshold" {
+  default = 75
 }
 
-variable "alarm_actions" {
+variable "alarm_disk_queue_threshold" {
+  default = 10
 }
+
+variable "alarm_free_disk_threshold" {
+  # 5GB
+  default = 5000000000
+}
+
+variable "alarm_free_memory_threshold" {
+  # 128MB
+  default = 128000000
+}
+
+variable "alarm_actions" {}
