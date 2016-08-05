@@ -30,7 +30,7 @@ resource "aws_db_instance" "postgresql" {
   backup_window           = "${var.backup_window}"
   maintenance_window      = "${var.maintenance_window}"
   multi_az                = "${var.multi_availability_zone}"
-  port                    = "5432"
+  port                    = "${var.database_port}"
   vpc_security_group_ids  = ["${aws_security_group.postgresql.id}"]
   db_subnet_group_name    = "${var.subnet_group}"
   parameter_group_name    = "${var.parameter_group}"
