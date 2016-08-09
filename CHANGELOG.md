@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Replace hardcoded database ports with `database_port` variable
+
 ## 1.0.0
 
 - Add support for `auto_minor_version_upgrade`.
