@@ -6,8 +6,6 @@ variable "environment" {
   default = "Unknown"
 }
 
-variable "vpc_id" {}
-
 variable "allocated_storage" {
   default = "32"
 }
@@ -24,6 +22,8 @@ variable "storage_type" {
   default = "gp2"
 }
 
+variable "vpc_id" {}
+
 variable "database_identifier" {}
 
 variable "database_name" {}
@@ -31,6 +31,10 @@ variable "database_name" {}
 variable "database_password" {}
 
 variable "database_username" {}
+
+variable "database_port" {
+  default = 5432
+}
 
 variable "backup_retention_period" {
   default = "30"

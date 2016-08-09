@@ -7,9 +7,7 @@ A Terraform module to create an Amazon Web Services (AWS) PostgreSQL Relational 
 ```javascript
 module "postgresql_rds" {
   source = "github.com/azavea/terraform-aws-postgresql-rds"
-
   vpc_id = "vpc-20f74844"
-
   allocated_storage = "32"
   engine_version = "9.4.4"
   instance_type = "db.t2.micro"
@@ -18,6 +16,7 @@ module "postgresql_rds" {
   database_name = "hector"
   database_username = "hector"
   database_password = "secret"
+  database_port = "5432"
   backup_retention_period = "30"
   backup_window = "04:00-04:30"
   maintenance_window = "sun:04:30-sun:05:30"
@@ -40,9 +39,9 @@ module "postgresql_rds" {
 
 ## Variables
 
+- `vpc_id` - ID of VPC meant to house database
 - `project` - Name of project this VPC is meant to house (default: `Unknown`)
 - `environment` - Name of environment this VPC is targeting (default: `Unknown`)
-- `vpc_id` - ID of VPC meant to house database
 - `allocated_storage` - Storage allocated to database instance (default: `32`)
 - `engine_version` - Database engine version (default: `9.4.4`)
 - `instance_type` - Instance type for database instance (default: `db.t2.micro`)
@@ -51,6 +50,7 @@ module "postgresql_rds" {
 - `database_name` - Name of database inside storage engine
 - `database_username` - Name of user inside storage engine
 - `database_password` - Database password inside storage engine
+- `database_port` - Port on which database will accept connections (default `5432`)
 - `backup_retention_period` - Number of days to keep database backups (default:
   `30`)
 - `backup_window` - 30 minute time window to reserve for backups (default:
