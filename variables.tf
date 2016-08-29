@@ -33,7 +33,7 @@ variable "database_password" {}
 variable "database_username" {}
 
 variable "database_port" {
-  default = 5432
+  default = "5432"
 }
 
 variable "backup_retention_period" {
@@ -69,21 +69,23 @@ variable "parameter_group" {
 }
 
 variable "alarm_cpu_threshold" {
-  default = 75
+  default = "75"
 }
 
 variable "alarm_disk_queue_threshold" {
-  default = 10
+  default = "10"
 }
 
 variable "alarm_free_disk_threshold" {
   # 5GB
-  default = 5000000000
+  default = "5000000000"
 }
 
 variable "alarm_free_memory_threshold" {
   # 128MB
-  default = 128000000
+  default = "128000000"
 }
 
-variable "alarm_actions" {}
+variable "alarm_actions" {
+  type = "list"
+}
