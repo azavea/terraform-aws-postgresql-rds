@@ -1,3 +1,9 @@
+## 2.0.0
+
+- Add support for Terraform 0.7.
+- Convert comma-delimited variables with lists types.
+- Ensure that numeric variables are strings.
+
 ## 1.1.0
 
 - Replace hardcoded database ports with `database_port` variable
