@@ -62,7 +62,7 @@ resource "aws_cloudwatch_metric_alarm" "database_cpu" {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 
-  alarm_actions = ["${split(",", var.alarm_actions)}"]
+  alarm_actions = ["${var.alarm_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
@@ -80,7 +80,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 
-  alarm_actions = ["${split(",", var.alarm_actions)}"]
+  alarm_actions = ["${var.alarm_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
@@ -98,7 +98,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 
-  alarm_actions = ["${split(",", var.alarm_actions)}"]
+  alarm_actions = ["${var.alarm_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
@@ -116,5 +116,5 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
   }
 
-  alarm_actions = ["${split(",", var.alarm_actions)}"]
+  alarm_actions = ["${var.alarm_actions}"]
 }
