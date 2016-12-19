@@ -59,6 +59,9 @@ module "postgresql_rds" {
   (default: `sun:04:30-sun:05:30`)
 - `auto_minor_version_upgrade` - Minor engine upgrades are applied automatically
  to the DB instance during the maintenance window (default: `true`)
+- `final_snapshot_identifier` - Identifier for final snapshot if `skip_final_snapshot` is set to `false` (default: `terraform-aws-postgresql-rds-snapshot`)
+- `skip_final_snapshot` - Flag to enable or disable a snapshot if the database instance is terminated (default: `true`)
+- `copy_tags_to_snapshot` - Flag to enable or disable copying instance tags to the final snapshot (default: `false`)
 - `multi_availability_zone` - Flag to enable hot standby in another availability
   zone (default: `false`)
 - `storage_encrypted` - Flag to enable storage encryption (default: `false`)

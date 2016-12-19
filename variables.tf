@@ -54,6 +54,18 @@ variable "auto_minor_version_upgrade" {
   default = true
 }
 
+variable "final_snapshot_identifier" {
+  default = "terraform-aws-postgresql-rds-snapshot"
+}
+
+variable "skip_final_snapshot" {
+  default = true
+}
+
+variable "copy_tags_to_snapshot" {
+  default = false
+}
+
 variable "multi_availability_zone" {
   default = false
 }
