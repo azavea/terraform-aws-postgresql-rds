@@ -1,3 +1,8 @@
+## 2.1.0
+
+- Add support for triggering a final snapshot with `skip_final_snapshot`.
+- Add support for naming the final snapshot with `final_snapshot_identifier` and copying existing tags with `copy_tags_to_snapshot`.
+
 ## 2.0.1
 
 - Fix support for `auto_minor_version_upgrade`.
