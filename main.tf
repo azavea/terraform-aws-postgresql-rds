@@ -17,24 +17,25 @@ resource "aws_security_group" "postgresql" {
 #
 
 resource "aws_db_instance" "postgresql" {
-  allocated_storage       = "${var.allocated_storage}"
-  engine                  = "postgres"
-  engine_version          = "${var.engine_version}"
-  identifier              = "${var.database_identifier}"
-  instance_class          = "${var.instance_type}"
-  storage_type            = "${var.storage_type}"
-  name                    = "${var.database_name}"
-  password                = "${var.database_password}"
-  username                = "${var.database_username}"
-  backup_retention_period = "${var.backup_retention_period}"
-  backup_window           = "${var.backup_window}"
-  maintenance_window      = "${var.maintenance_window}"
-  multi_az                = "${var.multi_availability_zone}"
-  port                    = "${var.database_port}"
-  vpc_security_group_ids  = ["${aws_security_group.postgresql.id}"]
-  db_subnet_group_name    = "${var.subnet_group}"
-  parameter_group_name    = "${var.parameter_group}"
-  storage_encrypted       = "${var.storage_encrypted}"
+  allocated_storage          = "${var.allocated_storage}"
+  engine                     = "postgres"
+  engine_version             = "${var.engine_version}"
+  identifier                 = "${var.database_identifier}"
+  instance_class             = "${var.instance_type}"
+  storage_type               = "${var.storage_type}"
+  name                       = "${var.database_name}"
+  password                   = "${var.database_password}"
+  username                   = "${var.database_username}"
+  backup_retention_period    = "${var.backup_retention_period}"
+  backup_window              = "${var.backup_window}"
+  maintenance_window         = "${var.maintenance_window}"
+  auto_minor_version_upgrade = "${var.auto_minor_version_upgrade}"
+  multi_az                   = "${var.multi_availability_zone}"
+  port                       = "${var.database_port}"
+  vpc_security_group_ids     = ["${aws_security_group.postgresql.id}"]
+  db_subnet_group_name       = "${var.subnet_group}"
+  parameter_group_name       = "${var.parameter_group}"
+  storage_encrypted          = "${var.storage_encrypted}"
 
   tags {
     Name        = "DatabaseServer"
