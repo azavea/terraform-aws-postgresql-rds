@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix support for `auto_minor_version_upgrade`.
+
 ## 2.0.0
 
 - Add support for Terraform 0.7.
