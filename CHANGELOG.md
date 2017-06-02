@@ -1,3 +1,7 @@
+## 2.2.0
+
+- Add support for `hosted_zone_id` output to allow for `ALIAS` DNS record creation.
+
 ## 2.1.0
 
 - Add support for triggering a final snapshot with `skip_final_snapshot`.
