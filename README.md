@@ -31,6 +31,8 @@ module "postgresql_rds" {
   alarm_free_disk_threshold = "5000000000"
   alarm_free_memory_threshold = "128000000"
   alarm_actions = ["arn:aws:sns..."]
+  ok_actions = ["arn:aws:sns..."]
+  insufficient_data_actions = ["arn:aws:sns..."]
 
   project = "Something"
   environment = "Staging"

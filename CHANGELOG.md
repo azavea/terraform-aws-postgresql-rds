@@ -1,3 +1,7 @@
+## 2.3.0
+
+- Add support for CloudWatch `ok_actions` and `insufficient_data_actions`.
+
 ## 2.2.0
 
 - Add support for `hosted_zone_id` output to allow for `ALIAS` DNS record creation.
