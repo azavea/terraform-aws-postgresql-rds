@@ -67,6 +67,8 @@ resource "aws_cloudwatch_metric_alarm" "database_cpu" {
   }
 
   alarm_actions = ["${var.alarm_actions}"]
+  ok_actions = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
@@ -85,6 +87,8 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
   }
 
   alarm_actions = ["${var.alarm_actions}"]
+  ok_actions = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
@@ -103,6 +107,8 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
   }
 
   alarm_actions = ["${var.alarm_actions}"]
+  ok_actions = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
@@ -121,4 +127,6 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
   }
 
   alarm_actions = ["${var.alarm_actions}"]
+  ok_actions = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
 }
