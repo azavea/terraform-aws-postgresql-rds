@@ -101,3 +101,11 @@ variable "alarm_free_memory_threshold" {
 variable "alarm_actions" {
   type = "list"
 }
+
+variable "ok_actions" {
+  type = "list"
+}
+
+variable "insufficient_data_actions" {
+  type = "list"
+}
