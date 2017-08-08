@@ -21,6 +21,7 @@ resource "aws_db_instance" "postgresql" {
   engine                     = "postgres"
   engine_version             = "${var.engine_version}"
   identifier                 = "${var.database_identifier}"
+  snapshot_identifier        = "${var.snapshot_identifier}"
   instance_class             = "${var.instance_type}"
   storage_type               = "${var.storage_type}"
   name                       = "${var.database_name}"
