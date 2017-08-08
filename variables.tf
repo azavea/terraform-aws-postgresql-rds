@@ -98,6 +98,10 @@ variable "alarm_free_memory_threshold" {
   default = "128000000"
 }
 
+variable "alarm_cpu_credit_balance_threshold" {
+  default = "30"
+}
+
 variable "alarm_actions" {
   type = "list"
 }

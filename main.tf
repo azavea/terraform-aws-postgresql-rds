@@ -130,3 +130,25 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
   ok_actions                = ["${var.ok_actions}"]
   insufficient_data_actions = ["${var.insufficient_data_actions}"]
 }
+
+resource "aws_cloudwatch_metric_alarm" "database_cpu_credits" {
+  // This results in 1 if instance_type starts with "db.t", 0 otherwise.
+  count               = "${replace(replace(var.instance_type, "/^db\\.[^t].*/", "0"), "/^db\\.t.*$/", "1")}"
+  alarm_name          = "alarm_${var.environment}_${var.database_identifier}_DatabaseCPUCreditBalance"
+  alarm_description   = "Database CPU credit balance"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "CPUCreditBalance"
+  namespace           = "AWS/RDS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "${var.alarm_cpu_credit_balance_threshold}"
+
+  dimensions {
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
+  }
+
+  alarm_actions             = ["${var.alarm_actions}"]
+  ok_actions                = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
+}
