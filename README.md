@@ -74,6 +74,7 @@ module "postgresql_rds" {
 - `alarm_disk_queue_threshold` - Disk queue alarm threshold (default: `10`)
 - `alarm_free_disk_threshold` - Free disk alarm threshold in bytes (default: `5000000000`)
 - `alarm_free_memory_threshold` - Free memory alarm threshold in bytes (default: `128000000`)
+- `alarm_cpu_credit_balance_threshold` - CPU credit balance threshold (default: `30`). Only used for `db.t2.*` instance types
 - `alarm_actions` - List of ARNs to be notified via CloudWatch when alarm enters ALARM state
 - `ok_actions` - List of ARNs to be notified via CloudWatch when alarm enters OK state
 - `insufficient_data_actions` - List of ARNs to be notified via CloudWatch when alarm enters INSUFFICIENT_DATA state
