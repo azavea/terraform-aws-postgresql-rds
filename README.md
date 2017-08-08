@@ -49,6 +49,7 @@ module "postgresql_rds" {
 - `instance_type` - Instance type for database instance (default: `db.t2.micro`)
 - `storage_type` - Type of underlying storage for database (default: `gp2`)
 - `database_identifier` - Identifier for RDS instance
+- `snapshot_identifier` - The name of the snapshot (if any) the database should be created from
 - `database_name` - Name of database inside storage engine
 - `database_username` - Name of user inside storage engine
 - `database_password` - Database password inside storage engine
