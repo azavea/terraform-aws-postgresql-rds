@@ -134,7 +134,7 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
 resource "aws_cloudwatch_metric_alarm" "database_cpu_credits" {
   // This results in 1 if instance_type starts with "db.t", 0 otherwise.
   count               = "${replace(replace(var.instance_type, "/^db\\.[^t].*/", "0"), "/^db\\.t.*$/", "1")}"
-  alarm_name          = "alarm_${var.environment}_${var.database_identifier}_DatabaseCPUCreditBalance"
+  alarm_name          = "alarm${var.environment}DatabaseCPUCreditBalance-${var.database_identifier}"
   alarm_description   = "Database CPU credit balance"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
