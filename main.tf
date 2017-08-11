@@ -53,7 +53,7 @@ resource "aws_db_instance" "postgresql" {
 #
 
 resource "aws_cloudwatch_metric_alarm" "database_cpu" {
-  alarm_name          = "alarm${var.environment}DatabaseServerCPUUtilization"
+  alarm_name          = "alarm${var.environment}DatabaseServerCPUUtilization-${var.database_identifier}"
   alarm_description   = "Database server CPU utilization"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -73,7 +73,7 @@ resource "aws_cloudwatch_metric_alarm" "database_cpu" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
-  alarm_name          = "alarm${var.environment}DatabaseServerDiskQueueDepth"
+  alarm_name          = "alarm${var.environment}DatabaseServerDiskQueueDepth-${var.database_identifier}"
   alarm_description   = "Database server disk queue depth"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -93,7 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
-  alarm_name          = "alarm${var.environment}DatabaseServerFreeStorageSpace"
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeStorageSpace-${var.database_identifier}"
   alarm_description   = "Database server free storage space"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -113,7 +113,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
-  alarm_name          = "alarm${var.environment}DatabaseServerFreeableMemory"
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeableMemory-${var.database_identifier}"
   alarm_description   = "Database server freeable memory"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
