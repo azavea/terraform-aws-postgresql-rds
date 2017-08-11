@@ -1,4 +1,11 @@
 #
+# Terraform required version
+#
+terraform {
+  required_version = ">= 0.8.0"
+}
+
+#
 # Security group resources
 #
 
@@ -133,7 +140,7 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
 
 resource "aws_cloudwatch_metric_alarm" "database_cpu_credits" {
   // This results in 1 if instance_type starts with "db.t", 0 otherwise.
-  count               = "${replace(replace(var.instance_type, "/^db\\.[^t].*/", "0"), "/^db\\.t.*$/", "1")}"
+  count               = "${substr(var.instance_type, 0, 3) == "db.t" ? 1 : 0}"
   alarm_name          = "alarm${var.environment}DatabaseCPUCreditBalance-${var.database_identifier}"
   alarm_description   = "Database CPU credit balance"
   comparison_operator = "LessThanThreshold"
