@@ -26,6 +26,10 @@ variable "vpc_id" {}
 
 variable "database_identifier" {}
 
+variable "snapshot_identifier" {
+  default = ""
+}
+
 variable "database_name" {}
 
 variable "database_password" {}
@@ -96,6 +100,10 @@ variable "alarm_free_disk_threshold" {
 variable "alarm_free_memory_threshold" {
   # 128MB
   default = "128000000"
+}
+
+variable "alarm_cpu_credit_balance_threshold" {
+  default = "30"
 }
 
 variable "alarm_actions" {

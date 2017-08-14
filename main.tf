@@ -1,4 +1,11 @@
 #
+# Terraform required version
+#
+terraform {
+  required_version = ">= 0.8.0"
+}
+
+#
 # Security group resources
 #
 
@@ -21,6 +28,7 @@ resource "aws_db_instance" "postgresql" {
   engine                     = "postgres"
   engine_version             = "${var.engine_version}"
   identifier                 = "${var.database_identifier}"
+  snapshot_identifier        = "${var.snapshot_identifier}"
   instance_class             = "${var.instance_type}"
   storage_type               = "${var.storage_type}"
   name                       = "${var.database_name}"
@@ -52,7 +60,7 @@ resource "aws_db_instance" "postgresql" {
 #
 
 resource "aws_cloudwatch_metric_alarm" "database_cpu" {
-  alarm_name          = "alarm${var.environment}DatabaseServerCPUUtilization"
+  alarm_name          = "alarm${var.environment}DatabaseServerCPUUtilization-${var.database_identifier}"
   alarm_description   = "Database server CPU utilization"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -72,7 +80,7 @@ resource "aws_cloudwatch_metric_alarm" "database_cpu" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
-  alarm_name          = "alarm${var.environment}DatabaseServerDiskQueueDepth"
+  alarm_name          = "alarm${var.environment}DatabaseServerDiskQueueDepth-${var.database_identifier}"
   alarm_description   = "Database server disk queue depth"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -92,7 +100,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_queue" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
-  alarm_name          = "alarm${var.environment}DatabaseServerFreeStorageSpace"
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeStorageSpace-${var.database_identifier}"
   alarm_description   = "Database server free storage space"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -112,7 +120,7 @@ resource "aws_cloudwatch_metric_alarm" "database_disk_free" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
-  alarm_name          = "alarm${var.environment}DatabaseServerFreeableMemory"
+  alarm_name          = "alarm${var.environment}DatabaseServerFreeableMemory-${var.database_identifier}"
   alarm_description   = "Database server freeable memory"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -121,6 +129,28 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
   period              = "60"
   statistic           = "Average"
   threshold           = "${var.alarm_free_memory_threshold}"
+
+  dimensions {
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
+  }
+
+  alarm_actions             = ["${var.alarm_actions}"]
+  ok_actions                = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "database_cpu_credits" {
+  // This results in 1 if instance_type starts with "db.t", 0 otherwise.
+  count               = "${substr(var.instance_type, 0, 3) == "db.t" ? 1 : 0}"
+  alarm_name          = "alarm${var.environment}DatabaseCPUCreditBalance-${var.database_identifier}"
+  alarm_description   = "Database CPU credit balance"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "CPUCreditBalance"
+  namespace           = "AWS/RDS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "${var.alarm_cpu_credit_balance_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"

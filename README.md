@@ -49,6 +49,7 @@ module "postgresql_rds" {
 - `instance_type` - Instance type for database instance (default: `db.t2.micro`)
 - `storage_type` - Type of underlying storage for database (default: `gp2`)
 - `database_identifier` - Identifier for RDS instance
+- `snapshot_identifier` - The name of the snapshot (if any) the database should be created from
 - `database_name` - Name of database inside storage engine
 - `database_username` - Name of user inside storage engine
 - `database_password` - Database password inside storage engine
@@ -74,6 +75,7 @@ module "postgresql_rds" {
 - `alarm_disk_queue_threshold` - Disk queue alarm threshold (default: `10`)
 - `alarm_free_disk_threshold` - Free disk alarm threshold in bytes (default: `5000000000`)
 - `alarm_free_memory_threshold` - Free memory alarm threshold in bytes (default: `128000000`)
+- `alarm_cpu_credit_balance_threshold` - CPU credit balance threshold (default: `30`). Only used for `db.t*` instance types
 - `alarm_actions` - List of ARNs to be notified via CloudWatch when alarm enters ALARM state
 - `ok_actions` - List of ARNs to be notified via CloudWatch when alarm enters OK state
 - `insufficient_data_actions` - List of ARNs to be notified via CloudWatch when alarm enters INSUFFICIENT_DATA state
