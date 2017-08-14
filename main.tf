@@ -1,4 +1,11 @@
 #
+# Terraform required version
+#
+terraform {
+  required_version = ">= 0.8.0"
+}
+
+#
 # Security group resources
 #
 
@@ -122,6 +129,28 @@ resource "aws_cloudwatch_metric_alarm" "database_memory_free" {
   period              = "60"
   statistic           = "Average"
   threshold           = "${var.alarm_free_memory_threshold}"
+
+  dimensions {
+    DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
+  }
+
+  alarm_actions             = ["${var.alarm_actions}"]
+  ok_actions                = ["${var.ok_actions}"]
+  insufficient_data_actions = ["${var.insufficient_data_actions}"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "database_cpu_credits" {
+  // This results in 1 if instance_type starts with "db.t", 0 otherwise.
+  count               = "${substr(var.instance_type, 0, 3) == "db.t" ? 1 : 0}"
+  alarm_name          = "alarm${var.environment}DatabaseCPUCreditBalance-${var.database_identifier}"
+  alarm_description   = "Database CPU credit balance"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "CPUCreditBalance"
+  namespace           = "AWS/RDS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "${var.alarm_cpu_credit_balance_threshold}"
 
   dimensions {
     DBInstanceIdentifier = "${aws_db_instance.postgresql.id}"
