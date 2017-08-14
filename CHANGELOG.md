@@ -1,3 +1,9 @@
+## 2.4.0
+
+- Add support for creating an RDS database with `snapshot_identifier`.
+- Add support for conditional CPU credit CloudWatch alarms.
+- Make Terraform 0.8.x minimum supported version.
+
 ## 2.3.0
 
 - Add support for CloudWatch `ok_actions` and `insufficient_data_actions`.
