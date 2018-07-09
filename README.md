@@ -48,6 +48,7 @@ module "postgresql_rds" {
 - `engine_version` - Database engine version (default: `9.4.4`)
 - `instance_type` - Instance type for database instance (default: `db.t2.micro`)
 - `storage_type` - Type of underlying storage for database (default: `gp2`)
+- `iops` - The amount of provisioned IOPS. Setting this implies a `storage_type` of `io1` (default: `0`)
 - `database_identifier` - Identifier for RDS instance
 - `snapshot_identifier` - The name of the snapshot (if any) the database should be created from
 - `database_name` - Name of database inside storage engine
