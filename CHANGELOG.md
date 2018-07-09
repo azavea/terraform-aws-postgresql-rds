@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Add support for `iops` to go along with `storage_type`.
+
 ## 2.4.0
 
 - Add support for creating an RDS database with `snapshot_identifier`.
