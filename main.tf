@@ -31,6 +31,7 @@ resource "aws_db_instance" "postgresql" {
   snapshot_identifier        = "${var.snapshot_identifier}"
   instance_class             = "${var.instance_type}"
   storage_type               = "${var.storage_type}"
+  iops                       = "${var.iops}"
   name                       = "${var.database_name}"
   password                   = "${var.database_password}"
   username                   = "${var.database_username}"

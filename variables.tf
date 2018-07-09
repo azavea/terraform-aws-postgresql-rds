@@ -22,6 +22,10 @@ variable "storage_type" {
   default = "gp2"
 }
 
+variable "iops" {
+  default = "0"
+}
+
 variable "vpc_id" {}
 
 variable "database_identifier" {}
