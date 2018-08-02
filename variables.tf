@@ -82,6 +82,10 @@ variable "storage_encrypted" {
   default = false
 }
 
+variable "monitoring_interval" {
+  default = "0"
+}
+
 variable "subnet_group" {}
 
 variable "parameter_group" {
