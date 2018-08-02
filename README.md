@@ -25,6 +25,7 @@ module "postgresql_rds" {
   storage_encrypted = false
   subnet_group = "${aws_db_subnet_group.default.name}"
   parameter_group = "${aws_db_parameter_group.default.name}"
+  monitoring_interval = "60"
 
   alarm_cpu_threshold = "75"
   alarm_disk_queue_threshold = "10"
@@ -69,6 +70,7 @@ module "postgresql_rds" {
 - `multi_availability_zone` - Flag to enable hot standby in another availability
   zone (default: `false`)
 - `storage_encrypted` - Flag to enable storage encryption (default: `false`)
+- `monitoring_interval` - The interval, in seconds, between points when Enhanced Monitoring metrics are collected (default: `0`)
 - `subnet_group` - Database subnet group
 - `parameter_group` - Database engine parameter group (default:
   `default.postgres9.4`)
