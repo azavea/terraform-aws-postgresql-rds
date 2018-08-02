@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Add support for Enhanced Monitoring.
+
 ## 2.5.0
 
 - Add support for `iops` to go along with `storage_type`.
