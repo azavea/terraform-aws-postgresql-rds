@@ -40,7 +40,7 @@ module "postgresql_rds" {
 }
 ```
 
-### Note about Enhanced Monitoring Support
+### Note about Enhanced Monitoring support
 
 If the `monitoring_interval` passed as an input to this module is `0`, an empty `monitoring_role_arn` value will be threaded into the `aws_db_instance` resource. 
 
@@ -50,15 +50,8 @@ This is because, if a value for `monitoring_role_arn` is threaded into an `aws_d
 InvalidParameterCombination: You must specify a MonitoringInterval value other than 0 when you specify a MonitoringRoleARN value.
 ```
 
-This behavior doesn't match the information in the [Terraform docs](https://www.terraform.io/docs/providers/aws/r/db_instance.html#monitoring_interval) for the resource. Both the `monitoring_role_arn` and `monitoring_interval` arguments to `aws_db_instance` should be optional, and setting a `monitoring_interval` to `0` should be enough to disable enhanced monitoring, irrespective of the value of `monitoring_role_arn`. 
+If you're curious to know more, see the discussion within terraform-providers/terraform-provider-aws#315.
 
-See the following open issues for the Terraform AWS provider:
-
-https://github.com/terraform-providers/terraform-provider-aws/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+MonitoringInterval+
-
-See a good explaination of what's causing this here:
-
-https://github.com/terraform-providers/terraform-provider-aws/issues/315#issuecomment-437404518
 
 ## Variables
 
