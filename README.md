@@ -52,7 +52,6 @@ InvalidParameterCombination: You must specify a MonitoringInterval value other t
 
 If you're curious to know more, see the discussion within terraform-providers/terraform-provider-aws#315.
 
-
 ## Variables
 
 - `vpc_id` - ID of VPC meant to house database
