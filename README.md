@@ -50,7 +50,7 @@ This is because, if a value for `monitoring_role_arn` is threaded into an `aws_d
 InvalidParameterCombination: You must specify a MonitoringInterval value other than 0 when you specify a MonitoringRoleARN value.
 ```
 
-If you're curious to know more, see the discussion within terraform-providers/terraform-provider-aws#315.
+If you're curious to know more, see the discussion within https://github.com/terraform-providers/terraform-provider-aws/issues/315.
 
 ## Variables
 
