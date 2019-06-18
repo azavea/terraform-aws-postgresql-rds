@@ -1,3 +1,8 @@
+## 2.7.0
+
+- Add support for instance deletion projection.
+- Only set `monitoring_role_arn` if `monitoring_interval` is greater than zero.
+
 ## 2.6.0
 
 - Add support for Enhanced Monitoring.
