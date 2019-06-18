@@ -43,11 +43,11 @@ module "postgresql_rds" {
 
 ### Note about Enhanced Monitoring support
 
-If the `monitoring_interval` passed as an input to this module is `0`, an empty `monitoring_role_arn` value will be threaded into the `aws_db_instance` resource. 
+If the `monitoring_interval` passed as an input to this module is `0`, an empty `monitoring_role_arn` value will be passed to the `aws_db_instance` resource. 
 
-This is because, if a value for `monitoring_role_arn` is threaded into an `aws_db_instance`, along with a `monitoring_interval` of `0`, the following error will occur:
+This is because, if a value for `monitoring_role_arn` is passed to an `aws_db_instance`, along with a `monitoring_interval` of `0`, the following error will occur:
 
-```bash
+```
 InvalidParameterCombination: You must specify a MonitoringInterval value other than 0 when you specify a MonitoringRoleARN value.
 ```
 
