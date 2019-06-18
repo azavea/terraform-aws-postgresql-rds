@@ -26,6 +26,7 @@ module "postgresql_rds" {
   subnet_group = "${aws_db_subnet_group.default.name}"
   parameter_group = "${aws_db_parameter_group.default.name}"
   monitoring_interval = "60"
+  deletion_protection = true
 
   alarm_cpu_threshold = "75"
   alarm_disk_queue_threshold = "10"
@@ -83,6 +84,7 @@ If you're curious to know more, see the discussion within https://github.com/ter
   zone (default: `false`)
 - `storage_encrypted` - Flag to enable storage encryption (default: `false`)
 - `monitoring_interval` - The interval, in seconds, between points when Enhanced Monitoring metrics are collected (default: `0`)
+- `deletion_protection` - Flag to protect the database instance from deletion (default: `false`)
 - `subnet_group` - Database subnet group
 - `parameter_group` - Database engine parameter group (default:
   `default.postgres9.4`)
