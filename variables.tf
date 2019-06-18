@@ -86,6 +86,10 @@ variable "monitoring_interval" {
   default = "0"
 }
 
+variable "deletion_protection" {
+  default = false
+}
+
 variable "subnet_group" {}
 
 variable "parameter_group" {

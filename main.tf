@@ -74,6 +74,7 @@ resource "aws_db_instance" "postgresql" {
   storage_encrypted          = "${var.storage_encrypted}"
   monitoring_interval        = "${var.monitoring_interval}"
   monitoring_role_arn        = "${var.monitoring_interval > 0 ? aws_iam_role.enhanced_monitoring.arn : ""}"
+  deletion_protection        = "${var.deletion_protection}"
 
   tags {
     Name        = "DatabaseServer"
