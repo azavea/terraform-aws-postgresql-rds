@@ -86,7 +86,7 @@ If you're curious to know more, see the discussion within https://github.com/ter
 - `storage_encrypted` - Flag to enable storage encryption (default: `false`)
 - `monitoring_interval` - The interval, in seconds, between points when Enhanced Monitoring metrics are collected (default: `0`)
 - `deletion_protection` - Flag to protect the database instance from deletion (default: `false`)
-- `cloudwatch_logs_exports` - List of logs to publish to CloudWatch Logs (default: `["postgresql, "upgrade"]`)
+- `cloudwatch_logs_exports` - List of logs to publish to CloudWatch Logs. See [all](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs) available options. (default: `["postgresql, "upgrade"]`)
 - `subnet_group` - Database subnet group
 - `parameter_group` - Database engine parameter group (default:
   `default.postgres9.4`)
