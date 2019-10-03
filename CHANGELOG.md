@@ -1,3 +1,7 @@
+## 2.8.0
+
+- Add support for publishing logs to CloudWatch Logs.
+
 ## 2.7.0
 
 - Add support for instance deletion projection.
