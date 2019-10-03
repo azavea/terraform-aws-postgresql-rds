@@ -90,6 +90,11 @@ variable "deletion_protection" {
   default = false
 }
 
+variable "cloudwatch_logs_exports" {
+  type    = "list"
+  default = ["postgresql", "upgrade"]
+}
+
 variable "subnet_group" {}
 
 variable "parameter_group" {
