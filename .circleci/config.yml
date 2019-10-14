@@ -1,0 +1,15 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: hashicorp/terraform:latest
+
+    steps:
+      - checkout
+      - run:
+          name: Install Bash
+          command: apk add --no-cache bash
+      - run:
+          name: Execute cibuild
+          command: ./scripts/cibuild
