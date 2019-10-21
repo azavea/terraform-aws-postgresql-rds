@@ -1,5 +1,7 @@
 # terraform-aws-postgresql-rds
 
+[![CircleCI](https://circleci.com/gh/azavea/terraform-aws-postgresql-rds.svg?style=svg)](https://circleci.com/gh/azavea/terraform-aws-postgresql-rds)
+
 A Terraform module to create an Amazon Web Services (AWS) PostgreSQL Relational Database Server (RDS).
 
 ## Usage
