@@ -1,3 +1,9 @@
+## 3.0.0
+
+- Add support for Terraform 0.12; 0.12 is now the minimum supported version.
+- Add a `tags` variable.
+- Add continuous integration support via CircleCI.
+
 ## 2.8.0
 
 - Add support for publishing logs to CloudWatch Logs.
