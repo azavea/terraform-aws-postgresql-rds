@@ -147,7 +147,7 @@ variable "deletion_protection" {
 
 variable "cloudwatch_logs_exports" {
   default     = ["postgresql", "upgrade"]
-  type        = list
+  type        = list(any)
   description = "List of logs to publish to CloudWatch Logs"
 }
 
@@ -160,6 +160,18 @@ variable "parameter_group" {
   default     = "default.postgres11"
   type        = string
   description = "Database engine parameter group"
+}
+
+variable "performance_insights_enabled" {
+  default     = false
+  type        = bool
+  description = "Flag to enable Performance Insights"
+}
+
+variable "performance_insights_retention_period" {
+  default     = null
+  type        = number
+  description = "The amount of time, in days, to retain Performance Insights data"
 }
 
 variable "alarm_cpu_threshold" {
@@ -195,17 +207,17 @@ variable "alarm_cpu_credit_balance_threshold" {
 }
 
 variable "alarm_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters ALARM state"
 }
 
 variable "ok_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters OK state"
 }
 
 variable "insufficient_data_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters INSUFFICIENT_DATA state"
 }
 
