@@ -1,0 +1,35 @@
+---
+# Configuration file for MegaLinter
+# See all available variables at https://oxsecurity.github.io/megalinter/configuration/ and in linters documentation
+
+APPLY_FIXES: none
+DISABLE:
+  - COPYPASTE
+DISABLE_LINTERS:
+  - MARKDOWN_MARKDOWNLINT
+  - SPELL_CSPELL
+  - REPOSITORY_CHECKOV
+  - REPOSITORY_TRIVY
+  - TERRAFORM_CHECKOV
+  - TERRAFORM_TERRASCAN
+  - TERRAFORM_KICS
+  - YAML_PRETTIER
+  - YAML_V8R
+UPDATED_SOURCES_REPORTER: false
+SHOW_ELAPSED_TIME: true
+
+# Formatting has one annoying bug which apparently varies between Mac and Linux.
+# https://github.com/oxsecurity/megalinter/issues/1975
+# This works around it to set permissions equal to whatever .gitignore is set to.
+
+PRE_COMMANDS:
+  - command: |-
+      echo $(ls -lah .gitignore | sed 's/\s\+/ /g' | cut -d ' ' -f3,4 | sed 's/ /\:/') > perms.txt
+      cat perms.txt
+    cwd: "workspace"
+
+POST_COMMANDS:
+  - command: |-
+      find . -user root -group root -exec chown $(cat perms.txt) {} \;
+      rm perms.txt
+    cwd: "workspace"

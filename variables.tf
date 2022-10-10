@@ -17,7 +17,7 @@ variable "allocated_storage" {
 }
 
 variable "engine_version" {
-  default     = "11.5"
+  default     = "13"
   type        = string
   description = "Database engine version"
 }
@@ -147,7 +147,7 @@ variable "deletion_protection" {
 
 variable "cloudwatch_logs_exports" {
   default     = ["postgresql", "upgrade"]
-  type        = list
+  type        = list(any)
   description = "List of logs to publish to CloudWatch Logs"
 }
 
@@ -157,7 +157,6 @@ variable "subnet_group" {
 }
 
 variable "parameter_group" {
-  default     = "default.postgres11"
   type        = string
   description = "Database engine parameter group"
 }
@@ -195,17 +194,17 @@ variable "alarm_cpu_credit_balance_threshold" {
 }
 
 variable "alarm_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters ALARM state"
 }
 
 variable "ok_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters OK state"
 }
 
 variable "insufficient_data_actions" {
-  type        = list
+  type        = list(any)
   description = "List of ARNs to be notified via CloudWatch when alarm enters INSUFFICIENT_DATA state"
 }
 

@@ -1,8 +1,10 @@
 # terraform-aws-postgresql-rds
 
-[![CircleCI](https://circleci.com/gh/azavea/terraform-aws-postgresql-rds.svg?style=svg)](https://circleci.com/gh/azavea/terraform-aws-postgresql-rds)
+A Terraform module to create an Amazon Web Services (AWS) PostgreSQL Relational Database Server (RDS) with a few alarms.
 
-A Terraform module to create an Amazon Web Services (AWS) PostgreSQL Relational Database Server (RDS).
+Note: If starting a new project it may be recommended to not use this module. (Use AWS provider and define your own alarms)
+
+Please run ./scripts/lint before making a PR, you can also use the format option.
 
 ## Usage
 
@@ -11,8 +13,8 @@ module "postgresql_rds" {
   source = "github.com/azavea/terraform-aws-postgresql-rds"
   vpc_id = "vpc-20f74844"
   allocated_storage = "32"
-  engine_version = "9.4.4"
-  instance_type = "db.t2.micro"
+  engine_version = "13"
+  instance_type = "db.t3.micro"
   storage_type = "gp2"
   database_identifier = "jl23kj32sdf"
   database_name = "hector"
@@ -62,7 +64,7 @@ If you're curious to know more, see the discussion within https://github.com/ter
 - `project` - Name of project this VPC is meant to house (default: `Unknown`)
 - `environment` - Name of environment this VPC is targeting (default: `Unknown`)
 - `allocated_storage` - Storage allocated to database instance (default: `32`)
-- `engine_version` - Database engine version (default: `11.5`)
+- `engine_version` - Database engine version (default: `13`)
 - `instance_type` - Instance type for database instance (default: `db.t3.micro`)
 - `storage_type` - Type of underlying storage for database (default: `gp2`)
 - `iops` - The amount of provisioned IOPS. Setting this implies a `storage_type` of `io1` (default: `0`)
@@ -90,8 +92,7 @@ If you're curious to know more, see the discussion within https://github.com/ter
 - `deletion_protection` - Flag to protect the database instance from deletion (default: `false`)
 - `cloudwatch_logs_exports` - List of logs to publish to CloudWatch Logs. See [all](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs) available options. (default: `["postgresql, "upgrade"]`)
 - `subnet_group` - Database subnet group
-- `parameter_group` - Database engine parameter group (default:
-  `default.postgres11`)
+- `parameter_group` - Database engine parameter group
 - `alarm_cpu_threshold` - CPU alarm threshold as a percentage (default: `75`)
 - `alarm_disk_queue_threshold` - Disk queue alarm threshold (default: `10`)
 - `alarm_free_disk_threshold` - Free disk alarm threshold in bytes (default: `5000000000`)

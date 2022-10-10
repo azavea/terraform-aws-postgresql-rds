@@ -68,7 +68,7 @@
 
 ## 0.3.0
 
-- Add RDS instance id in output `id`.
+- Add RDS instance `id` in output `id`.
 
 ## 0.2.1
 

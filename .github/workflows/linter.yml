@@ -1,0 +1,20 @@
+---
+name: Lint Code Base
+
+on:
+  push:
+  pull_request:
+    branches: [develop, master, main]
+
+
+jobs:
+  lint:
+    # Run Mega Linter against code base
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint Code Base
+        uses: oxsecurity/megalinter/flavors/terraform@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: develop
