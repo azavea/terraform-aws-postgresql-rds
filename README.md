@@ -101,6 +101,10 @@ If you're curious to know more, see the discussion within https://github.com/ter
 - `ok_actions` - List of ARNs to be notified via CloudWatch when alarm enters OK state
 - `insufficient_data_actions` - List of ARNs to be notified via CloudWatch when alarm enters INSUFFICIENT_DATA state
 - `tags` - Extra tags to attach to the RDS resources (default: `{}`)
+- `max_allocated_storage` -  is configured, this argument represents the initial storage allocation and differences from the configuration will be ignored automatically when Storage Autoscaling occurs. If replicate_source_db is set, the value is ignored during the creation of the instance.
+- `performance_insights_enabled`- (Optional) Specifies whether Performance Insights are enabled. Defaults to false.
+- `performance_insights_retention_period` - (Optional) The days to retain backups for. Must be between 0 and 35. Default is 0.
+- `performance_insights_kms_key_id` - (Optional) The ARN for the KMS key to encrypt Performance Insights data. When specifying performance_insights_kms_key_id, performance_insights_enabled needs to be set to true. Once KMS key is set, it can never be changed.
 
 ## Outputs
 
