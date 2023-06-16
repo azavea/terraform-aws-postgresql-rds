@@ -11,9 +11,10 @@ module "postgresql_rds" {
   source = "github.com/azavea/terraform-aws-postgresql-rds"
   vpc_id = "vpc-20f74844"
   allocated_storage = "32"
-  engine_version = "9.4.4"
-  instance_type = "db.t2.micro"
-  storage_type = "gp2"
+  max_allocated_storage = "64"
+  engine_version = "14"
+  instance_type = "db.t3.micro"
+  storage_type = "gp3"
   database_identifier = "jl23kj32sdf"
   database_name = "hector"
   database_username = "hector"
@@ -62,10 +63,11 @@ If you're curious to know more, see the discussion within https://github.com/ter
 - `project` - Name of project this VPC is meant to house (default: `Unknown`)
 - `environment` - Name of environment this VPC is targeting (default: `Unknown`)
 - `allocated_storage` - Storage allocated to database instance (default: `32`)
-- `engine_version` - Database engine version (default: `11.5`)
+- `max_allocated_storage` - Maximum storage to use with storage auto-scaling. `0` disables storage auto-scaling (default: `0`)
+- `engine_version` - Database engine version (default: `14`)
 - `instance_type` - Instance type for database instance (default: `db.t3.micro`)
-- `storage_type` - Type of underlying storage for database (default: `gp2`)
-- `iops` - The amount of provisioned IOPS. Setting this implies a `storage_type` of `io1` (default: `0`)
+- `storage_type` - Type of underlying storage for database (default: `gp3`)
+- `iops` - The amount of provisioned IOPS. Works with `storage_type` of `io1` or `gp3`. `gp3` volumes below 400GB are locked at 3000 IOPS. (default: `3000`)
 - `database_identifier` - Identifier for RDS instance
 - `snapshot_identifier` - The name of the snapshot (if any) the database should be created from
 - `database_name` - Name of database inside storage engine

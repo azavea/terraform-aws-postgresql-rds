@@ -16,8 +16,14 @@ variable "allocated_storage" {
   description = "Storage allocated to database instance"
 }
 
+variable "max_allocated_storage" {
+  default     = 0
+  type        = number
+  description = "Max storage for auto-allocation"
+}
+
 variable "engine_version" {
-  default     = "11.5"
+  default     = "14"
   type        = string
   description = "Database engine version"
 }
@@ -29,13 +35,13 @@ variable "instance_type" {
 }
 
 variable "storage_type" {
-  default     = "gp2"
+  default     = "gp3"
   type        = string
   description = "Type of underlying storage for database"
 }
 
 variable "iops" {
-  default     = 0
+  default     = 3000
   type        = number
   description = "The amount of provisioned IOPS"
 }
