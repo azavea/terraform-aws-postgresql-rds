@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Add support for 'max_allocated_storage' parameter
+
 ## 3.0.0
 
 - Add support for Terraform 0.12; 0.12 is now the minimum supported version.
